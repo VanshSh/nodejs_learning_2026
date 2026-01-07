@@ -1,0 +1,15 @@
+{
+  "name": "my-nodejs-hiten-udemy-course-learning",
+  "version": "1.0.0",
+  "description": "- To run file in watch mode: `node --watch script.js`",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@types/node": "^25.0.3"
+  }
+}
