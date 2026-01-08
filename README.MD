@@ -1,6 +1,12 @@
 ```
 Since this is kind of my learning notes of nodejs so make it small , but don;t remove important stuff. and return the reply as same in the README.md file format in one code widget
 
+I am learning Node js and today i learnt this topic
+
+Event Queue , Event Loop, Thread Pool
+
+so can you please make learning notes and summary for this so that in future i can just go through those notes and recall in README.md file
+
 ```
 
 
@@ -12,8 +18,8 @@ Since this is kind of my learning notes of nodejs so make it small , but don;t r
   ## Chapter 1 - Introduction
 - To run file in watch mode: `node --watch script.js`
 
----
----
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 
 ## Chapter 2 - Node.js modules, `require` and the module wrapper
 
@@ -107,8 +113,8 @@ console.log(c2.get()); // 1 -> same cached instance as in a.js
 - JSON modules: `require('./data.json')` returns the parsed object.
 - Native add-ons: `.node` files are binary modules and require appropriate build/tooling.
 
-***
-***
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 ## Chapter 3 — node_modules and package-lock.json
 
 - node_modules
@@ -131,9 +137,8 @@ console.log(c2.get()); // 1 -> same cached instance as in a.js
 	- If dependency state gets corrupted, remove `node_modules` and reinstall (`rm -rf node_modules && npm install` on Unix; use appropriate PowerShell commands on Windows).
 	- Be mindful of native add-ons: their binaries may be platform-specific and can require rebuilds after reinstall.
 
----
----
 
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 
 ## Chapter 4 — builtin modules: the `node:` prefix and the `fs` module
 
@@ -221,5 +226,149 @@ Quick examples (conceptual):
 
 	- `await fs.promises.rm('./build', { recursive: true, force: true });`
 
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
+## Chapter 5 — Event Loop, Event Queue, and Thread Pool
+
+
+Node.js is **single-threaded** but still handles thousands of concurrent operations efficiently.
+This is possible because of the **Event Loop**, **Event Queue**, and **Thread Pool**.
+
 ---
+
+## 1️⃣ Event Queue
+
+### What is it?
+The **Event Queue** stores callbacks of **asynchronous operations** that are ready to be executed.
+
+### Examples of tasks that go to Event Queue:
+- `setTimeout`
+- `setInterval`
+- `setImmediate`
+- Promise callbacks (`.then`)
+- I/O callbacks (after completion)
+
+### Key Point
+👉 Tasks wait in queues **until the Event Loop picks them up**.
+
 ---
+
+## 2️⃣ Event Loop
+
+### What is it?
+The **Event Loop** is the **heart of Node.js**.  
+It continuously checks:
+1. Is the Call Stack empty?
+2. Is there any task waiting in queues?
+
+If yes → it pushes the task to the Call Stack for execution.
+
+---
+
+### Event Loop Phases (simplified order)
+
+1. **Timers Phase**
+   - Executes `setTimeout`, `setInterval`
+
+2. **I/O Callbacks Phase**
+   - Network, file system callbacks
+
+3. **Idle / Prepare**
+   - Internal Node.js operations
+
+4. **Poll Phase**
+   - Fetch new I/O events
+   - Executes I/O callbacks
+
+5. **Check Phase**
+   - Executes `setImmediate`
+
+6. **Close Callbacks**
+   - Cleanup like `socket.on('close')`
+
+---
+
+### Microtask Queue (High Priority)
+Executed **after every phase**
+- `process.nextTick()`
+- Promise `.then()` / `.catch()`
+
+⚠️ `process.nextTick()` runs **before Promises**
+
+---
+
+### Key Points
+- Event Loop runs **continuously**
+- Executes async code **without blocking**
+- Microtasks have **higher priority** than normal callbacks
+
+---
+
+## 3️⃣ Thread Pool
+
+### What is it?
+Node.js uses a **Thread Pool (via libuv)** to handle **heavy or blocking operations**.
+
+Default size: **4 threads**
+
+---
+
+### Operations handled by Thread Pool
+- File system (`fs`)
+- Crypto (`bcrypt`, hashing)
+- Compression
+- DNS lookup
+
+These tasks run in **background threads**, not the main thread.
+
+---
+
+### Why Thread Pool is needed?
+Node.js main thread must stay **free** to:
+- Handle requests
+- Execute callbacks
+- Keep app responsive
+
+---
+
+## 4️⃣ How Everything Works Together
+
+1. JS code runs on **Call Stack**
+2. Async task is offloaded
+   - I/O → OS
+   - Heavy task → Thread Pool
+3. Once done → callback enters **Event Queue**
+4. Event Loop pushes it to **Call Stack**
+5. Callback executes
+
+---
+
+## 5️⃣ Important Interview Points
+
+- Node.js is **single-threaded but asynchronous**
+- Event Loop enables **non-blocking I/O**
+- Thread Pool handles **CPU-intensive tasks**
+- Promises & `nextTick` run **before timers**
+- Blocking the event loop = ❌ bad performance
+
+---
+
+## 6️⃣ One-Line Summary
+
+> Node.js uses a **single-threaded event loop** with **queues and a thread pool** to handle async operations efficiently without blocking the main thread.
+
+---
+
+## 7️⃣ Mental Model (Easy Recall)
+
+- **Call Stack** → executes JS
+- **Thread Pool / OS** → does heavy work
+- **Event Queue** → holds completed tasks
+- **Event Loop** → traffic police 🚦
+
+---
+
+📌 Tip:
+Never block the event loop with heavy synchronous code.
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
