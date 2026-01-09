@@ -372,3 +372,174 @@ Node.js main thread must stay **free** to:
 Never block the event loop with heavy synchronous code.
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
+## Chapter-6 📦 Node.js EventEmitter – All-in-One Learning Widget
+
+> Lightweight, event-driven communication system in Node.js  
+> Used internally by Node (HTTP, Streams, FS) and widely in real-world apps
+
+
+## 🔹 What is EventEmitter?
+
+`EventEmitter` is a **core Node.js module** that enables different parts of an application to communicate using **events**.
+
+- One part **emits** an event
+- Other parts **listen** and **respond**
+
+📌 Follows **Observer / Publish–Subscribe pattern**
+
+---
+
+## 🔹 Import & Create
+
+```js
+const EventEmitter = require('events')
+const eventEmitter = new EventEmitter()
+````
+
+---
+
+## 🔹 Register Listeners
+
+### `.on()` → Runs every time
+
+```js
+eventEmitter.on('greet', (name) => {
+  console.log('😇 Hello Event Emitter', name)
+})
+```
+
+### `.once()` → Runs only once
+
+```js
+eventEmitter.once('pushNotify', () => {
+  console.log('😇 This will run only once')
+})
+```
+
+---
+
+## 🔹 Emit Events
+
+```js
+eventEmitter.emit('greet', 'Vansh')
+eventEmitter.emit('greet', 'Anuj')
+
+eventEmitter.emit('pushNotify')
+eventEmitter.emit('pushNotify') // ❌ will not run again
+```
+
+---
+
+## 🔹 Named Listener (Best Practice)
+
+```js
+const myListener = () => {
+  console.log('😇 This is another test listener')
+}
+
+eventEmitter.on('test', myListener)
+eventEmitter.emit('test')
+```
+
+✅ Use named functions to:
+
+* remove listeners later
+* avoid memory leaks
+
+---
+
+## 🔹 Remove Listener
+
+```js
+eventEmitter.removeListener('test', myListener)
+eventEmitter.emit('test') // ❌ will not run
+```
+
+📌 Anonymous functions **cannot** be removed
+
+---
+
+## 🔹 Inspect Active Listeners
+
+```js
+console.log(eventEmitter.listeners('greet'))
+```
+
+* Returns array of listeners for the event
+* Useful for debugging
+
+---
+
+## 🔹 Class-Based EventEmitter (Real-World Pattern)
+
+```js
+class Chat extends EventEmitter {
+  sendMessage(message) {
+    this.emit('messageReceived', message)
+  }
+}
+```
+
+### Usage
+
+```js
+const chat = new Chat()
+
+chat.on('messageReceived', (msg) => {
+  console.log('New Message:', msg)
+})
+
+chat.sendMessage('Hello! How are you?')
+```
+
+---
+
+## 🔹 Execution Behavior (Important)
+
+* EventEmitter is **synchronous**
+* Listeners run in **registration order**
+* Errors inside listeners can crash the app if unhandled
+
+---
+
+## 🔹 Common Use Cases
+
+✅ Logging systems
+✅ Notifications
+✅ Chat / Messaging
+✅ Background jobs
+✅ Custom framework hooks
+
+---
+
+## 🔹 When NOT to Use
+
+❌ Simple one-to-one function calls
+❌ Async flow control → use **Promises / async-await**
+
+---
+
+## 🔹 Quick Mental Model 🧠
+
+```
+emit(event) ──▶ listeners react instantly
+```
+
+---
+
+## 🔹 Interview Quick Hits ⭐
+
+* Core module → `events`
+* Pattern → Observer / Pub-Sub
+* `.on()` vs `.once()`
+* `.emit()` passes data
+* `.removeListener()` needs same function reference
+
+---
+
+## 🔹 One-Line Summary
+
+> **EventEmitter enables decoupled, event-driven communication inside Node.js applications.**
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
