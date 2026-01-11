@@ -15,13 +15,13 @@ so can you please make learning notes and summary for this so that in future i c
 
 # Nodejs Learning from Hiten Udemy Course
 
-  ## Chapter 1 - Introduction
+### Chapter 1 - Introduction
 - To run file in watch mode: `node --watch script.js`
 
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 
-## Chapter 2 - Node.js modules, `require` and the module wrapper
+### Chapter 2 - Node.js modules, `require` and the module wrapper
 
 This section explains how Node.js loads modules, what `require` does, the module wrapper function, the main module types (built-in, third-party, and custom), and how module caching works.
 
@@ -115,7 +115,7 @@ console.log(c2.get()); // 1 -> same cached instance as in a.js
 
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
-## Chapter 3 — node_modules and package-lock.json
+### Chapter 3 — node_modules and package-lock.json
 
 - node_modules
 	- The `node_modules` folder contains the installed package code used at runtime (all files for each dependency).
@@ -140,7 +140,7 @@ console.log(c2.get()); // 1 -> same cached instance as in a.js
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 
-## Chapter 4 — builtin modules: the `node:` prefix and the `fs` module
+### Chapter 4 — builtin modules: the `node:` prefix and the `fs` module
 
 This chapter covers three focused topics: what the `node:` prefix means when importing built-in modules, the most important methods and usage patterns in the `fs` (file system) module, and what `{ recursive: true }` does in common `fs` operations.
 
@@ -228,7 +228,7 @@ Quick examples (conceptual):
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 
-## Chapter 5 — Event Loop, Event Queue, and Thread Pool
+### Chapter 5 — Event Loop, Event Queue, and Thread Pool
 
 
 Node.js is **single-threaded** but still handles thousands of concurrent operations efficiently.
@@ -373,7 +373,7 @@ Never block the event loop with heavy synchronous code.
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
 
-## Chapter-6 📦 Node.js EventEmitter – All-in-One Learning Widget
+### Chapter-6 📦 Node.js EventEmitter – All-in-One Learning Widget
 
 > Lightweight, event-driven communication system in Node.js  
 > Used internally by Node (HTTP, Streams, FS) and widely in real-world apps
@@ -541,5 +541,80 @@ emit(event) ──▶ listeners react instantly
 ## 🔹 One-Line Summary
 
 > **EventEmitter enables decoupled, event-driven communication inside Node.js applications.**
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
+### Chapter 7 — 📢 Node.js EventEmitter – ChatRoom (Summary Notes)
+
+## 🔹 What is EventEmitter?
+`EventEmitter` is a core Node.js module that allows objects to **emit events** and other parts of the code to **listen and react** to those events.  
+It follows the **event-driven (publish–subscribe) pattern**.
+
+---
+
+## 🔹 Why EventEmitter is Used Here
+- To notify when a user **joins**, **sends a message**, or **leaves**
+- To keep **business logic** and **event handling** separate
+- To build a scalable, real-time–like system (chat simulation)
+
+---
+
+## 🔹 ChatRoom Class Overview
+- `ChatRoom` **extends EventEmitter**
+- Maintains users using a `Set` (prevents duplicates)
+- Emits custom events instead of directly logging output
+
+---
+
+## 🔹 Custom Events
+| Event     | Emitted When       | Data Passed         |
+| --------- | ------------------ | ------------------- |
+| `join`    | User joins chat    | `user`              |
+| `message` | User sends message | `{ user, message }` |
+| `leave`   | User leaves chat   | `user`              |
+
+---
+
+## 🔹 Important Methods
+- `join(user)` → Adds user & emits `join`
+- `sendMessage(user, message)` → Emits `message` if user exists
+- `leave(user)` → Removes user & emits `leave`
+
+---
+
+## 🔹 Event Listeners
+- `.on('event', callback)` listens continuously
+- Each listener reacts **only when its event is emitted**
+- Output logic lives outside the class
+
+---
+
+## 🔹 Key Concepts Demonstrated
+- Event-driven architecture
+- Class inheritance with `super()`
+- Loose coupling between logic & effects
+- Observer / Pub-Sub design pattern
+
+---
+
+## 🔹 Benefits of This Approach
+✅ Clean & modular code  
+✅ Easy to extend (add more events/listeners)  
+✅ Ideal for real-time systems  
+✅ Matches core Node.js design philosophy  
+
+---
+
+## 🔹 Real-World Use Cases
+- Chat applications
+- Notification systems
+- Logging & analytics
+- Streams, sockets, microservices
+
+---
+
+## 🔹 One-Line Takeaway
+**EventEmitter helps build scalable, reactive systems by emitting events instead of tightly coupling logic and output.**
+
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
