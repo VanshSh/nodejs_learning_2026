@@ -617,4 +617,161 @@ It follows the **event-driven (publish–subscribe) pattern**.
 **EventEmitter helps build scalable, reactive systems by emitting events instead of tightly coupling logic and output.**
 
 
-🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
+### Chapter 8 —📦 Node.js Buffer – Learning Notes (README)
+
+## 🔹 What is a Buffer?
+- A **Buffer** is a Node.js class used to handle **raw binary data**
+- JavaScript strings are UTF-16, but Buffers work with **bytes**
+- Buffers are fixed-size and allocated outside the V8 heap
+
+### Common Use Cases
+- File handling (`fs`)
+- Streams
+- Network data (TCP/HTTP)
+- Encoding & decoding (UTF-8, Hex, Base64)
+
+---
+
+## 🔹 Importing Buffer
+```js
+const buffer = require('buffer')
+````
+
+> ℹ️ In modern Node.js, `Buffer` is global, so this import is optional.
+
+---
+
+## 🔹 Creating Buffers from Strings
+
+```js
+const buf1 = Buffer.from('Hello ')
+const buf2 = Buffer.from('World')
+```
+
+* `Buffer.from()` converts strings into binary data
+* Default encoding is **UTF-8**
+
+---
+
+## 🔹 Concatenating Buffers
+
+```js
+const buf3 = Buffer.concat([buf1, buf2])
+```
+
+* Combines multiple buffers into a single buffer
+* Useful when handling **chunked or streamed data**
+
+---
+
+## 🔹 Converting Buffer to String
+
+### Default Encoding (UTF-8)
+
+```js
+console.log(buf3.toString())
+// Output: Hello World
+```
+
+### Explicit UTF-8
+
+```js
+console.log(buf3.toString('utf-8'))
+// Output: Hello World
+```
+
+### Hex Encoding
+
+```js
+console.log(buf3.toString('hex'))
+// Output: 48656c6c6f20576f726c64
+```
+
+* Each byte is shown as **two hexadecimal characters**
+* Useful for debugging binary data
+
+### Base64 Encoding
+
+```js
+console.log(buf3.toString('base64'))
+// Output: SGVsbG8gV29ybGQ=
+```
+
+* Commonly used in:
+
+  * JWT tokens
+  * Image encoding
+  * Emails
+
+---
+
+## 🔹 Buffer Length
+
+```js
+console.log(buf3.length)
+// Output: 11
+```
+
+* Length is measured in **bytes**
+* `"Hello World"` → 11 bytes
+
+---
+
+## 🔹 Allocating a Buffer (Safe)
+
+```js
+const buf4 = Buffer.alloc(10)
+console.log(buf4)
+// Output: <Buffer 00 00 00 00 00 00 00 00 00 00>
+```
+
+* `Buffer.alloc()` initializes memory with zeros
+* **Safe and recommended**
+
+---
+
+## 🔹 Filling a Buffer
+
+```js
+buf4.fill('a')
+console.log(buf4.toString())
+// Output: aaaaaaaaaa
+```
+
+* Fills the entire buffer with the given value
+* `'a'` → ASCII value is written repeatedly
+
+---
+
+## 🔹 Allocating a Buffer (Unsafe)
+
+```js
+const buf5 = Buffer.allocUnsafe(10)
+console.log(buf5)
+```
+
+* Memory is **not initialized**
+* May contain **old or random data**
+* Faster, but **must be overwritten before use**
+
+⚠️ Use `allocUnsafe()` only when performance is critical and you overwrite immediately.
+
+---
+
+## 🔹 Key Takeaways
+
+* Buffers store **raw binary data**
+* Strings ≠ Buffers
+* Use:
+
+  * `Buffer.from()` → string to buffer
+  * `Buffer.concat()` → combine buffers
+  * `Buffer.alloc()` → safe memory
+  * `Buffer.allocUnsafe()` → fast but risky
+* Encoding matters (`utf-8`, `hex`, `base64`)
+
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
