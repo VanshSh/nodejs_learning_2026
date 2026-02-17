@@ -907,3 +907,28 @@ server.listen(PORT, () => {
 
 
 🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
+
+### Chapter 10 — Sementic Versioning (SemVer) in Node.js
+- Semantic Versioning (SemVer) is a versioning scheme for software that conveys meaning about the underlying changes.
+- A version number is in the format: `MAJOR.MINOR.PATCH` (e.g., `1.4.2`).
+- Each part has a specific meaning:
+  - **MAJOR** version: Incremented for incompatible API changes.
+  - **MINOR** version: Incremented for adding functionality in a backward-compatible manner.
+  - **PATCH** version: Incremented for backward-compatible bug fixes.
+  - Pre-release versions and build metadata can be added after the PATCH version (e.g., `1.0.0-alpha`, `1.0.0+build2012`).
+  - Semantic Versioning helps developers understand the impact of updating dependencies and manage compatibility in their projects.
+  - X.X.X => Major Minor Patch
+  - ~4.21.1 => Patch updates allowed (4.21.x)
+  - ^**4**.21.1 => Minor, and Patch updates allowed (4.x.x)
+  - 
+
+🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚🔚
+
+
+### Chapter 11 — MVC
+- MVC stands for Model-View-Controller, a software architectural pattern that separates an application into three main components:
+  - **Model**: Represents the data and business logic of the application. It manages the data, rules, and logic of the application.
+  - **View**: Represents the user interface and presentation layer. It displays data from the model to the user and sends user commands to the controller.
+  - **Controller**: Acts as an intermediary between the Model and View. It processes user input, interacts with the model to retrieve or update data, and determines which view to display.
+  - 
