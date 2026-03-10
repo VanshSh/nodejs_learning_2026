@@ -1,0 +1,18 @@
+{
+  "name": "building_fullstack_application_section_7",
+  "version": "1.0.0",
+  "description": "- docker compose up -d => to start the docker container in background\r - docker compose down => to stop the docker container\r - docker compose up => to start the docker container in foreground",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "drizzle.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "drizzle-kit": "^0.31.9",
+    "drizzle-orm": "^0.45.1",
+    "pg": "^8.20.0"
+  }
+}
