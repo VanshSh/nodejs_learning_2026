@@ -1,4 +1,5 @@
 const EventEmitter = require('events')
+console.log('😇 L-1 in myEvents.js=> ', EventEmitter)
 
 const eventEmitter = new EventEmitter()
 
