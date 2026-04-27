@@ -1,0 +1,6 @@
+- what is this project
+- File strucutre and usecase
+- what libraries are we using and WHY
+- explain the structure of the project
+- create the flow of the project
+- How to test the project
