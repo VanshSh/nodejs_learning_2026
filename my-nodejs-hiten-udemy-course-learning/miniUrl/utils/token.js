@@ -6,3 +6,13 @@ export function createUserToken(payload) {
     return token;
 
 }
+
+export function validateUserToken(token) {
+    try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET_KEY)
+        return payload
+    } catch (err) {
+        return null
+    }
+
+}

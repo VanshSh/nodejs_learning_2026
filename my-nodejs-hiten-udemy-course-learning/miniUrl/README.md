@@ -1,6 +1,6 @@
 - what is this project
-- File strucutre and usecase
 - what libraries are we using and WHY
 - explain the structure of the project
+- File strucutre and usecase of each file and explain importat function in those files use case of those function
 - create the flow of the project
-- How to test the project
+- How to run the project
